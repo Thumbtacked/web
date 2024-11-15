@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 10px;
+}
+
+.tasks {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.task {
+  display: flex;
+  width: 75%;
+  align-items: center;
+  border-top: 1px solid #808080;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.check {
+  height: 20px;
+  width: 20px;
+}
+
+.content {
+  align-self: end;
+  padding: 5px;
+  padding-left: 20px;
+}
+
+.content b, .content p {
+  word-break: break-word;
+}
+
+.delete {
+  margin-left: auto;
+  height: fit-content;
+  width: fit-content;
+  border: none;
+  background-color: inherit;
+}
+
+.input {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}

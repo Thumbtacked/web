@@ -1,0 +1,53 @@
+.ecolumn {
+  text-align: left;
+  width: 20px;
+  min-height: 100%;
+  padding: 0;
+  border: none;
+  display: inline-block;
+  background-color: #d3d3d3;
+  border-radius: 3px;
+}
+
+.erow {
+  text-align: left;
+  width: 100%;
+  height: 20px;
+  border: none;
+  display: block;
+  text-align: center;
+  background-color: #d3d3d3;
+  border-radius: 3px;
+}
+
+.expansion {
+  min-width: unset;
+  padding: 0;
+  height: 100%;
+  border: none;
+}
+
+.cell {
+  margin: 5px;
+  word-break: break-word;
+  white-space: pre-wrap;
+  outline: none;
+  text-align: left;
+}
+
+.cell:focus {
+  outline: none;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr, th, td {
+  min-width: 100px;
+  height: 100%;
+}
+
+td, th {
+  border:1px solid black;
+}

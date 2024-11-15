@@ -1,0 +1,27 @@
+.text {
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.text[default-value]:empty::before{
+  content: attr(default-value);
+  color: #888;
+  font-style: italic;
+}
+
+.input {
+  resize: none;
+  background-color: inherit;
+  font: inherit;
+  border: none;
+  outline: none;
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding: 0;
+  width: 100%;
+  display: inline-block;
+}

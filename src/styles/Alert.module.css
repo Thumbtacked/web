@@ -1,0 +1,47 @@
+.container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background-color: #ffac5a;
+  box-shadow: 0 0 2px #898989;
+  padding: 15px;
+  min-width: 300px;
+  text-align: center;
+  gap: 15px;
+  border-radius: 5px;
+  transition: all 1s;
+  animation-name:slideup;
+  animation-duration:0.3s;
+  animation-fill-mode:forwards;
+  animation-timing-function:ease-out;
+}
+
+.removal {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background-color: #ffac5a;
+  box-shadow: 0 0 2px #898989;
+  padding: 15px;
+  min-width: 300px;
+  text-align: center;
+  gap: 15px;
+  border-radius: 5px;
+  transition: all 1s;
+  animation-name: slidedown;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes slideup {
+  from{bottom: -50px}
+  to{bottom: 30px}
+}
+
+@keyframes slidedown {
+  from {bottom: 30px}
+  to {bottom: -50px}
+}

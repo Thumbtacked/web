@@ -1,0 +1,20 @@
+
+html, body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-size-adjust: 100%;
+  user-select: none;
+  -webkit-text-size-adjust: 100%;
+  -webkit-user-select: none;
+  color: black;
+  margin: 0;
+}
+
+p, b, textarea {
+  margin: 0;
+}
+
+* {
+  overscroll-behavior: none;
+  color: inherit;
+}
+
