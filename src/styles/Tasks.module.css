@@ -18,11 +18,9 @@
 .task {
   display: flex;
   width: 75%;
-  align-items: center;
   border-top: 1px solid #808080;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  height: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   box-sizing: border-box;
 }
 
@@ -32,8 +30,6 @@
 }
 
 .content {
-  align-self: end;
-  padding: 5px;
   padding-left: 20px;
 }
 
@@ -51,6 +47,28 @@
 
 .input {
   display: flex;
+  gap: 20px;
+}
+
+.form {
+  flex: 1;
+}
+
+.text {
+  padding-left: 15px;
+  border: 1px solid #808080;
+  border-radius: 10px;
+  height: 50px;
   width: 100%;
-  gap: 10px;
+  box-sizing: border-box;
+}
+
+.text:focus {
+  outline: none
+}
+
+.button {
+  padding: 0;
+  border: none;
+  background-color: inherit;
 }

@@ -76,7 +76,7 @@ export default function Widget({item, update, hover, setHover, children}) {
         <ContextMenu
         left={colorPicker[0]}
         top={colorPicker[1]}
-        close={() => setColorPicker(null)}
+        onClose={() => setColorPicker(null)}
         >
           <div className={styles.color}>
             <HexColorPicker
@@ -97,10 +97,10 @@ export default function Widget({item, update, hover, setHover, children}) {
         left={menu[0]}
         top={menu[1]}
         onClick={() => setMenu(null)}
-        close={() => setMenu(null)}>
+        onClose={() => setMenu(null)}>
           <div className={styles.options}>
             <button onClick={() => setEditHeader(true)}>Insert Title</button>
-            <button onClick={(event) => setColorPicker(menu)}>Select Color</button>
+            <button onClick={() => setColorPicker(menu)}>Select Color</button>
             <button onClick={() => update({color: null})}>Reset Color</button>
             <button onClick={moveForward}>Bring Forward</button>
             <button onClick={moveBackward}>Bring Backward</button>

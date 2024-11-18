@@ -62,12 +62,12 @@
 
 .options {
   width: 225px;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 2px #898989;
   display: flex;
   flex-direction: column;
-  background-color: #f9f9f9;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
 }
 
 .options button {

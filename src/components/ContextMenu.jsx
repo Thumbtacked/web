@@ -1,21 +1,26 @@
 import { useRef, useState, useEffect } from 'react';
 import styles from '../styles/ContextMenu.module.css';
 
-export default function ContextMenu(props) {
-  const [dimensions, setDimensions] = useState();
+export default function ContextMenu({left, top, onClose, onClick, children}) {
+  const [dimensions, setDimensions] = useState(null);
   const menu = useRef();
 
   const style = (
     dimensions ?
-    {left: `min(${props.left}px, calc(100vw - ${dimensions.width}px - 10px))`, top: `min(${props.top}px, calc(100vh - ${dimensions.height}px - 10px))`}
+    {
+      left: `min(${left}px, calc(100vw - ${dimensions.width}px - 10px))`,
+      top: `min(${top}px, calc(100vh - ${dimensions.height}px - 10px))`
+    }
     :
-    {left: props.left, top: props.top}
+    {
+      visibility: "hidden"
+    }
   );
 
   useEffect(() => {
     const handleClose = (event) => {
       if (menu.current && !menu.current.contains(event.target)) {
-        props.close();
+        onClose();
       }
     };
   
@@ -31,15 +36,15 @@ export default function ContextMenu(props) {
     if (menu.current) {
       setDimensions(menu.current.getBoundingClientRect());
     }
-  }, [menu])
+  }, [children]);
 
   return (
     <div
     className={styles.container}
     ref={menu}
     style={style}
-    onClick={props.onClick}>
-      {props.children}
+    onClick={onClick}>
+      {children}
     </div>
   )
 }

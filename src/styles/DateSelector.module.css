@@ -1,0 +1,76 @@
+.container {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.header {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.month {
+  font-weight: bold;
+}
+
+.controls {
+  margin-left: auto;
+}
+
+.control {
+  background-color: inherit;
+  border: none;
+  border-radius: 5px;
+}
+
+.control:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.days {
+  display: flex;
+  gap: 6px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.day {
+  flex: 1;
+  text-align: center;
+  font-size: small;
+  color: #808080;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  gap: 6px;
+}
+
+.date, .empty {
+  padding: 6px;
+  text-align: center;
+  font-size: small;
+  border-radius: 50%;
+}
+
+.date:hover {
+  background-color: #dff5ff;
+}
+
+.relative {
+  width: 100%;
+  border-radius: 5px;
+  padding: 7px 15px 7px;
+  text-align: left;
+  border: none;
+  margin-top: 10px;
+  background-color: #ccdcf1;
+}
+
+.relative:hover {
+  background-color: #a1c4f1;
+}
