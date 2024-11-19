@@ -1,5 +1,6 @@
 import Alert from './Alert';
 import BoardView from './Board';
+import EmptyView from './Empty';
 import Sidebar from './Sidebar';
 import TasksView from './Tasks';
 import styles from '../styles/Home.module.css';
@@ -17,6 +18,7 @@ export default function Home() {
 
       {(context.view === 0 || context.page?.type === 0) && <BoardView />}
       {(context.view === 1 || context.page?.type=== 1) && <TasksView />}
+      {Object.keys(context.pages).length === 0 && <EmptyView />}
     </div>
   )
 }

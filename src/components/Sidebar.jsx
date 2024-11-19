@@ -70,11 +70,23 @@ function Page({page, level, setNewPage}) {
 
         {hover &&
           <>
-            <button onClick={() => setNewPage({parent: page.id})} className={styles.create}>
+            <button
+            className={styles.create}
+            onClick={(event) => {
+              setNewPage({parent: page.id});
+              event.stopPropagation();
+            }}
+            >
               <AddBoxIcon fontSize="small" /> 
             </button>
 
-            <button onClick={() => context.remove(page.id)} className={styles.delete}>
+            <button
+            className={styles.delete}
+            onClick={(event) => {
+              event.stopPropagation();
+              context.remove(page.id)
+            }}
+            >
               <DeleteIcon fontSize="small" /> 
             </button>
           </>

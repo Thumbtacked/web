@@ -25,9 +25,8 @@ export function AppProvider({children}) {
       children: []
     }
   });
-
-  const [current, setCurrent] = useState(Object.keys(pages)[0]);
-  const [alert, setAlert] = useState();
+  const [current, setCurrent] = useState(Object.keys(pages)[0] || null);
+  const [alert, setAlert] = useState(null);
 
   const value = {
     alert,
@@ -35,6 +34,11 @@ export function AppProvider({children}) {
     pages,
     create: (page, parent) => {
       const id = Math.max(...[...Object.keys(pages), 0]) + 1;
+
+      if (Object.keys(pages).length === 0) {
+        setCurrent(id);
+      }
+
       setPages({
         ...pages,
         [id]: {
@@ -55,24 +59,27 @@ export function AppProvider({children}) {
       const {[id]: oldPage, ...newPages} = pages;
 
       if (oldPage.parent) {
-        newPages[oldPage.parent].children = newPages[oldPage.parent].children.filter(child => child !== id);
+        newPages[oldPage.parent] = {
+          ...newPages[oldPage.parent],
+          children: newPages[oldPage.parent].children.filter(child => child !== id)
+        };
       }
 
-      const _collect = (page) => {
+      const removeChildren = (page) => {
         page.children.forEach(child => {
-          _collect(newPages[child]);
+          removeChildren(newPages[child]);
           delete newPages[child];
         });
       };
 
-      _collect(oldPage);
+      removeChildren(oldPage);
       setPages(newPages);
 
-      if (id === current) {
-        setCurrent(Object.keys(pages)[0]);
+      if (current === id) {
+        setCurrent(Object.keys(newPages)[0] || null);
       }
     },
-    content: pages[current].content,
+    content: pages[current]?.content,
     setContent: (newContent) => {
       setPages({...pages, [current]: {...pages[current], content: newContent}})
     },
