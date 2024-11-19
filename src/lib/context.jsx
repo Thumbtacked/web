@@ -4,22 +4,30 @@ import { useLocalStorage } from './hooks';
 const AppContext = createContext();
 
 export function AppProvider({children}) {
-  const [home, setHome] = useLocalStorage("home", {"items": {}, "layout": []});
-  const [tasks, setTasks] = useLocalStorage("tasks", []);
-  const [pages, setPages] = useLocalStorage("pages", {});
-
-  const [view, setView] = useState(0);
-  const [current, setCurrent] = useState(null);
-  const [alert, setAlert] = useState();
-
-  const views = {
-    0: {get: home, set: (newContent) => setHome(newContent)},
-    1: {get: tasks, set: (newContent) => setTasks(newContent)},
+  const [pages, setPages] = useLocalStorage("pages", {
+    1: {
+      id: 1,
+      title: "Home",
+      type: 0,
+      content: {
+        items: {},
+        layout: []
+      },
+      parent: null,
+      children: []
+    },
     2: {
-      get: pages[current]?.content,
-      set: (newContent) => setPages({...pages, [current]: {...pages[current], content: newContent}})
+      id: 2,
+      title: "Tasks",
+      type: 1,
+      content: [],
+      parent: null,
+      children: []
     }
-  };
+  });
+
+  const [current, setCurrent] = useState(Object.keys(pages)[0]);
+  const [alert, setAlert] = useState();
 
   const value = {
     alert,
@@ -59,22 +67,16 @@ export function AppProvider({children}) {
 
       _collect(oldPage);
       setPages(newPages);
+
+      if (id === current) {
+        setCurrent(Object.keys(pages)[0]);
+      }
     },
-    showHome: () => {
-      setCurrent(null);
-      setView(0);
+    content: pages[current].content,
+    setContent: (newContent) => {
+      setPages({...pages, [current]: {...pages[current], content: newContent}})
     },
-    showTasks: () => {
-      setCurrent(null);
-      setView(1);
-    },
-    showPage: (id) => {
-      setCurrent(id);
-      setView(2);
-    },
-    content: views[view].get,
-    setContent: views[view].set,
-    view: view,
+    showPage: setCurrent,
     page: pages[current],
   };
 

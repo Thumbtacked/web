@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 
+import AddIcon from '@mui/icons-material/Add';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -21,33 +21,9 @@ export default function Sidebar() {
     <>
       {newPage && <NewPage parent={newPage.parent} close={() => setNewPage(null)}/>}
       <div className={styles.container}>
-        <div className={styles.header}>
-          <button className={styles.button} onClick={() => setNewPage({parent: null})}>
-            New <CreateIcon fontSize="small" />
-          </button>
-
-          <button className={styles.button}>
-            Search <SearchIcon fontSize="small" />
-          </button>
-        </div>
-
-        <div
-        onClick={() => context.showHome()}
-        className={styles.view}
-        style={context.view === 0 ? {backgroundColor:"rgba(0, 0, 0, 0.15)"} : {}}
-        >
-          Home
-        </div>
-
-        <div
-        onClick={() => context.showTasks()}
-        className={styles.view}
-        style={context.view === 1 ? {backgroundColor:"rgba(0, 0, 0, 0.15)"} : {}}
-        >
-          Tasks
-        </div>
-
-        <p className={styles.pages}>Pages</p>
+        <button className={styles.search}>
+          Search <SearchIcon fontSize="small" />
+        </button>
 
         {Object.values(context.pages).filter(page => (!page.parent)).map((page =>
           <Page
@@ -58,12 +34,12 @@ export default function Sidebar() {
           />
         ))}
 
-        {Object.values(context.pages).filter(page => (!page.parent)).length === 0 &&
-          <div onClick={() => setNewPage({parent: null})} className={styles.page}>
-            <CreateIcon fontSize="small" />
-            <p>Click to start...</p>
-          </div>
-        }
+        <div
+        className={styles.plus}
+        onClick={() => setNewPage({parent: null})}
+        >
+          <AddIcon fontSize="small" />
+        </div>
       </div>
     </>
   )
@@ -82,7 +58,7 @@ function Page({page, level, setNewPage}) {
       className={styles.page}
       style={{
         backgroundColor: context.page?.id === page.id ? "rgba(0, 0, 0, 0.15)" : "",
-        paddingLeft: `${15 * level}px`
+        paddingLeft: `${5 + (15 * (level - 1))}px`
       }}
       >
         {page.type === 0 && <SpaceDashboardIcon fontSize="small" />}
