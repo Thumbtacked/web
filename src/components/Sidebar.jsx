@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 import AddIcon from '@mui/icons-material/Add';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -9,17 +9,18 @@ import SearchIcon from '@mui/icons-material/Search'
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
-import Modal from './Modal';
+import CreatePage from './CreatePage';
 import styles from '../styles/Sidebar.module.css';
 import { useAppContext } from '../lib/context';
 
 export default function Sidebar() {
   const context = useAppContext();
   const [newPage, setNewPage] = useState(null);
+  const [search, setSearch] = useState(null);
 
   return (
     <>
-      {newPage && <NewPage parent={newPage.parent} close={() => setNewPage(null)}/>}
+      {newPage && <CreatePage parent={newPage.parent} close={() => setNewPage(null)}/>}
       <div className={styles.container}>
         <button className={styles.search}>
           Search <SearchIcon fontSize="small" />
@@ -102,57 +103,5 @@ function Page({page, level, setNewPage}) {
         />
       )}
     </>
-  )
-}
-
-function NewPage({close, parent}) {
-  const context = useAppContext();
-
-  const [title, setTitle] = useState("");
-  const select = useRef();
-
-  const intialContent = {
-    0: {"items": {}, "layout": []},
-    1: [],
-    2: "",
-    3: null
-  };
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-
-    if (!title) {
-      return;
-    }
-
-    context.create({
-      title: title,
-      type: parseInt(select.current.value),
-      content: intialContent[parseInt(select.current.value)],
-    }, parent);
-
-    close();
-  }
-
-  return (
-    <Modal onClose={close}>
-      <form className={styles.new} onSubmit={onSubmit}>
-        <b>New Page</b>
-
-        <input onChange={(event) => setTitle(event.target.value)} placeholder="Enter a title..." />
-
-        <select ref={select}>
-            <option value={0}>Board</option>
-            <option value={1}>Tasks</option>
-            <option value={2}>Document</option>
-            <option value={3}>Folder</option>
-        </select>
-
-        <div className={styles.submit}>
-          <button onClick={close} type="button">Cancel</button>
-          <button type="submit">Create</button>
-        </div>
-      </form>
-    </Modal>
   )
 }
