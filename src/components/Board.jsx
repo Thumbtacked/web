@@ -36,13 +36,13 @@ export default function Board() {
       left: 10,
       color: null,
       ...data
-    }
+    };
 
     context.setContent({
       items: {...context.content.items, [item.id]: item},
       layout: [...context.content.layout, item.id]
     });
-  }
+  };
 
   const updateItem = (id, item) => {
     context.setContent({
@@ -103,5 +103,5 @@ export default function Board() {
         </div>
       </div>
     </div>
-  )
+  );
 }

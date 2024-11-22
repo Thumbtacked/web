@@ -6,7 +6,7 @@
   border: none;
   display: inline-block;
   background-color: #d3d3d3;
-  border-radius: 3px;
+  border-radius: 0px 5px 5px 0px;
 }
 
 .erow {
@@ -17,7 +17,7 @@
   display: block;
   text-align: center;
   background-color: #d3d3d3;
-  border-radius: 3px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .expansion {
@@ -50,4 +50,6 @@ tr, th, td {
 
 td, th {
   border:1px solid black;
+  height: 25px;
+  padding-left: 5px;
 }

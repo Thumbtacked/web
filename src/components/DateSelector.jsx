@@ -15,11 +15,11 @@ export default function DateSelector({left, top, onClose, onSubmit}) {
 
   const showPreviousMonth = () => {
     setCurrent(new Date(current.getFullYear(), current.getMonth() - 1));
-  }
+  };
 
   const showNextMonth = () => {
     setCurrent(new Date(current.getFullYear(), current.getMonth() + 1));
-  }
+  };
 
   return (
     <ContextMenu

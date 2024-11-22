@@ -39,7 +39,7 @@ export default function TasksView() {
 
       <NewTask onSubmit={createTask} />
     </div>
-  )
+  );
 }
 
 function NewTask({onSubmit}) {
@@ -61,7 +61,7 @@ function NewTask({onSubmit}) {
     setContent("");
     setDueDate(null);
     setDueTime(null);
-  }
+  };
 
   return (
     <>
@@ -113,7 +113,7 @@ function NewTask({onSubmit}) {
         </button>
       </div>
     </>
-  )
+  );
 }
 
 function Task({task, remove}) {
@@ -140,5 +140,5 @@ function Task({task, remove}) {
         </button>
       }
     </div>
-  )
+  );
 }

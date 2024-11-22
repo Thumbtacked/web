@@ -16,7 +16,8 @@ export default function TimeSelector({left, top, onClose, onSubmit}) {
     } else {
       onSubmit({"hours": result[1], "minutes": result[2]});
     }
-  }
+  };
+  
   return (
     <ContextMenu
     left={left}

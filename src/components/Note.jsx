@@ -10,8 +10,9 @@ export default function Note({item, update}) {
     <Widget item={item} update={update} hover={hover} setHover={setHover}>
       <Editable
       value={item.content}
-      onEdit={(value) => update({content: value})}
+      placeholder="Click here to edit..."
+      onChange={(value) => update({content: value})}
       />
     </Widget>
-  )
+  );
 }

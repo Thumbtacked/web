@@ -1,5 +1,6 @@
 import Alert from './Alert';
 import BoardView from './Board';
+import DocumentView from './Document';
 import EmptyView from './Empty';
 import Sidebar from './Sidebar';
 import TasksView from './Tasks';
@@ -10,15 +11,17 @@ export default function Home() {
   const context = useAppContext();
 
   return (
-    <div className={styles.container}>
-      {context.alert &&
-        <Alert message={context.alert} onClose={() => context.setAlert(null)} />
-      }
-      <Sidebar />
+    <>
+      {context.alert && <Alert message={context.alert} onClose={() => context.setAlert(null)} />}
 
-      {(context.view === 0 || context.page?.type === 0) && <BoardView />}
-      {(context.view === 1 || context.page?.type=== 1) && <TasksView />}
-      {Object.keys(context.pages).length === 0 && <EmptyView />}
-    </div>
-  )
+      <div className={styles.container}>
+        <Sidebar />
+
+        {Object.keys(context.pages).length === 0 && <EmptyView />}
+        {context.page?.type === 0 && <BoardView />}
+        {context.page?.type === 1 && <TasksView />}
+        {context.page?.type === 2 && <DocumentView />}
+      </div>
+    </>
+  );
 }

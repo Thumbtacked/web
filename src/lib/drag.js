@@ -5,7 +5,7 @@ export function startMouseDrag(event, target, hook) {
   const onMove = (event) => _onMove(target, offsetX, offsetY, event.clientX, event.clientY, hook);
   window.addEventListener("mousemove", onMove);
   window.addEventListener("mouseup", () => {
-    window.removeEventListener("mousemove", onMove)
+    window.removeEventListener("mousemove", onMove);
     target.style.opacity = "";
   });
 }

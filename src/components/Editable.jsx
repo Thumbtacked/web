@@ -1,51 +1,50 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from '../styles/Editable.module.css';
 
-export default function Editable({value, defaultValue, inline, submitEmpty, onEdit, onSubmit, selected}) {
-  const [edit, setEdit] = useState(false);
+export default function Editable({inline, value, placeholder, onChange}) {
+  const [editing, setEditing] = useState(false);
+  const editable = useRef();
+
+  useEffect(() => {
+    if (editing) {
+      editable.current.focus();
+    }
+  }, [editing]);
 
   return (
     <>
-      {edit ?
-      <textarea
-      className={styles.input}
-      onInput={(event) => {
-        if (onEdit) {
-          onEdit(event.target.value);
-        }
-        event.target.style.height = "0px";
-        event.target.style.height = `${event.target.scrollHeight}px`;
-      }}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" & (inline === true)) {
-          event.preventDefault();
-          event.target.blur();
-        }
-      }}
-      onBlur={(event) => {
-        if (onSubmit) {
-          if (!(submitEmpty === false) || event.target.value) {
-            onSubmit(event.target.value);
+      {(editing || value) ? 
+        <p
+        contentEditable
+        suppressContentEditableWarning
+        className={styles.input}
+        spellCheck={false}
+        ref={editable}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" & inline === true) {
+            event.preventDefault();
+            event.target.blur();
           }
-        }
-        setEdit(false);
-      }}
-      onFocus={(event) => {
-        event.target.style.height = "0px";
-        event.target.style.height = `${event.target.scrollHeight}px`;
-      }}
-      value={value}
-      autoFocus
-      />
+        }}
+        onFocus={(event) => {
+          event.target.spellcheck = true;
+        }}
+        onBlur={(event) => {
+          event.target.spellcheck = false;
+          onChange(event.target.textContent);
+          setEditing(false);
+        }}
+        >
+          {value}
+        </p>
       :
-      <p
-      onClick={() => setEdit(true)}
-      default-value={defaultValue ?? "Click here to edit..."}
-      className={styles.text}
-      >
-        {value}
-      </p>
+        <p
+        className={styles.placeholder}
+        onClick={() => setEditing(true)}
+        >
+          {placeholder}
+        </p>
       }
     </>
-  )
+  );
 }

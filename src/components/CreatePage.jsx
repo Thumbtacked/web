@@ -63,5 +63,5 @@ export default function CreatePage({close, parent}) {
         </div>
       </form>
     </Modal>
-  )
+  );
 }

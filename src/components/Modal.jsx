@@ -8,7 +8,7 @@ export default function Modal({children, onClose}) {
     if (content.current && !content.current.contains(event.target)) {
       onClose();
     }
-  }
+  };
 
   return (
     <div className={styles.overlay} onClick={handleClose}>
@@ -16,5 +16,5 @@ export default function Modal({children, onClose}) {
         {children}
       </div>
     </div>
-  )
+  );
 }

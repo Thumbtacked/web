@@ -40,7 +40,7 @@ export default function Widget({item, update, hover, setHover, children}) {
 
     if (index < context.content.layout.length - 1) {
       const newLayout = [...context.content.layout];
-      [newLayout[index+1], newLayout[index]] = [newLayout[index], newLayout[index+1]]
+      [newLayout[index+1], newLayout[index]] = [newLayout[index], newLayout[index+1]];
       context.setContent({
         ...context.content,
         layout: newLayout
@@ -140,11 +140,13 @@ export default function Widget({item, update, hover, setHover, children}) {
         <div className={styles.header}>
           {(item.title || editHeader) &&
           <Editable
+          inline
           value={item.title}
-          defaultValue='Click here to add title...'
-          inline={true}
-          onEdit={(title) => update({title: title})}
-          onSubmit={() => setEditHeader(false)}
+          placeholder="Click here to add title..."
+          onChange={(title) => {
+            update({title: title});
+            setEditHeader(false);
+          }}
           />}
         </div>
 
@@ -153,5 +155,5 @@ export default function Widget({item, update, hover, setHover, children}) {
         </div>
       </div>
     </>
-  )
+  );
 }

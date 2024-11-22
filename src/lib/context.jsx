@@ -79,9 +79,25 @@ export function AppProvider({children}) {
         setCurrent(Object.keys(newPages)[0] || null);
       }
     },
+    set: (id, newPage) => {
+      setPages({
+        ...pages,
+        [id]: {
+          ...pages[id],
+          ...newPage
+        }
+      });
+    }
+    ,
     content: pages[current]?.content,
     setContent: (newContent) => {
-      setPages({...pages, [current]: {...pages[current], content: newContent}})
+      setPages({
+        ...pages,
+        [current]: {
+          ...pages[current],
+          content: newContent
+        }
+      });
     },
     showPage: setCurrent,
     page: pages[current],

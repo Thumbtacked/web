@@ -11,6 +11,10 @@ export default function Media({item, update}) {
   const [loading, setLoading] = useState(false);
 
   const loadEmbed = async (url) => {
+    if (!url) {
+      return;
+    }
+
     if (!import.meta.env.VITE_APP_EMBEDS_BASE_URL) {
       return context.setAlert("No proxy is configured to fetch metadata.");
     }
@@ -34,7 +38,7 @@ export default function Media({item, update}) {
     }
 
     update({content: content});
-  }
+  };
 
   return (
     <Widget item={item} update={update} hover={hover} setHover={setHover}>
@@ -78,14 +82,12 @@ export default function Media({item, update}) {
         :
           <Editable
           inline
-          defaultValue="Insert link here..."
-          submitEmpty={false}
-          onSubmit={(url) => loadEmbed(url)}
+          placeholder="Insert link here..."
+          onChange={(url) => loadEmbed(url)}
           />
         )
       }
 
     </Widget>
-  )
+  );
 }
-

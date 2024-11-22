@@ -12,24 +12,30 @@ export default function List({item, update}) {
     const newItem = {...item};
     text ? newItem.content[index].text = text : newItem.content.splice(index, 1);
     update(newItem);
-  }  
+  };
 
   const onCheck = (index, event) => {
     const newItem = {...item};
     newItem.content[index].checked = event.target.checked;
     update(newItem);
-  }
+  };
+
+  const onCreate = (text) => {
+    if (text) {
+      update({content: [...item.content, {checked: false, text: text}]});
+      setInputValue("");
+    }
+  };
 
   return (
     <Widget item={item} update={update} hover={hover} setHover={setHover}>
       {item.content.map((line, index) => (
-        <div className={styles.item}>
+        <div className={styles.item} key={index}>
           <input checked={line.checked} onChange={(event) => onCheck(index, event)} type="checkbox" />
           <Editable
-          className={styles.value}
+          inline
           value={line.text}
-          inline={true}
-          onEdit={(text) => onEdit(index, text)}
+          onChange={(text) => onEdit(index, text)}
           />
         </div>
       ))}
@@ -38,18 +44,13 @@ export default function List({item, update}) {
         <div className={styles.item}>
           <input disabled type="checkbox" />
           <Editable
-          className={styles.editable}
-          submitEmpty={false}
-          inline={true}
+          inline
           value={inputValue}
-          onEdit={(text) => setInputValue(text)}
-          onSubmit={(text) => {
-            update({content: [...item.content, {checked: false, text: text}]});
-            setInputValue(null);
-          }}
+          placeholder="Click here to edit..."
+          onChange={onCreate}
           />
         </div>
       }
     </Widget>
-  )
+  );
 }

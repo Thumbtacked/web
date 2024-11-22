@@ -5,7 +5,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
 import FolderIcon from '@mui/icons-material/Folder';
-import SearchIcon from '@mui/icons-material/Search'
+import SearchIcon from '@mui/icons-material/Search';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 
@@ -16,7 +16,6 @@ import { useAppContext } from '../lib/context';
 export default function Sidebar() {
   const context = useAppContext();
   const [newPage, setNewPage] = useState(null);
-  const [search, setSearch] = useState(null);
 
   return (
     <>
@@ -43,7 +42,7 @@ export default function Sidebar() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
 function Page({page, level, setNewPage}) {
@@ -85,7 +84,7 @@ function Page({page, level, setNewPage}) {
             className={styles.delete}
             onClick={(event) => {
               event.stopPropagation();
-              context.remove(page.id)
+              context.remove(page.id);
             }}
             >
               <DeleteIcon fontSize="small" /> 
@@ -103,5 +102,5 @@ function Page({page, level, setNewPage}) {
         />
       )}
     </>
-  )
+  );
 }

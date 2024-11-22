@@ -29,7 +29,7 @@ export default function ContextMenu({left, top, onClose, onClick, children}) {
     return () => {
       document.removeEventListener("mousedown", handleClose);
       document.removeEventListener("scroll", handleClose, true);
-    }
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -46,5 +46,5 @@ export default function ContextMenu({left, top, onClose, onClick, children}) {
     onClick={onClick}>
       {children}
     </div>
-  )
+  );
 }
